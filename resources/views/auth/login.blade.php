@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
     <main class="flex-1  ">
-        <section class="w-full h-screen flex items-center justify-center ">
-            <div class=" space-y-10 xl:space-y-16 ">
+        <section class="w-full lg:mb-32 flex items-center justify-center ">
+            <div class=" space-y-10 ">
                 <div class="grid max-w-screen mx-auto gap-4 items-center md:grid-cols-2 md:gap-16">
                     <div>
                         <h3
