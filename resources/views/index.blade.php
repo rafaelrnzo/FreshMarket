@@ -1,6 +1,6 @@
     @extends('layouts.master')
     @section('content')
-        <div class=" h-auto  ">
+        <div class=" h-auto pb-16 ">
             <main class="flex flex-col gap-6">
                 <div class="border-b border-b-gray-200 grid md:grid-cols-2 py-4 items-center">
                     <div class="flex flex-col items-start ">
@@ -19,21 +19,21 @@
                                         <i class="fa-solid fa-credit-card text-green-700"></i>
                                         <p class="text-green-700 text-bold"> @currency(Auth::user()->wallet->credit) </p>
                                     </div>
-                                    <button
+                                    <a href="{{ route('topup.index') }}"
                                         class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-background hover:bg-accent hover:text-accent-foreground px-4 py-2 text-white">
-                                        <div class="flex flex-col justify-center items-center">
+                                        <div href="{{ route('topup.index') }}" class="flex flex-col justify-center items-center">
                                             <i class="fa-solid fa-square-plus text-xl"></i>
                                             TopUp
                                         </div>
-                                    </button>
-                                    <button
+                                    </a>
+                                    <a href="{{ route('topup.index') }}"
                                         class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-background hover:bg-accent hover:text-accent-foreground  px-4 py-2 text-white">
                                         <div class="flex flex-col justify-center items-center">
                                             <i class="fa-solid fa-money-bill-transfer text-xl"></i>
                                             Withdraw
                                         </div>
 
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         @else
@@ -44,12 +44,12 @@
                 <div class="grid md:grid-cols-3 grid-cols-2 gap-6">
                     @foreach ($products as $product)
                         <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full bg-green-50/50">
-                            <div class="">
+                            <div class="flex justify-between flex-col">
                                 <div class="">
                                     <img src="{{ $product->thumbnail }}" alt="Heirloom tomato"
                                         class="w-full lg:h-[16rem] h-[6rem] object-cover rounded-md " />
                                 </div>
-                                <div class="p-4">
+                                <div class="p-4 flex justify-between flex-col h-full">
                                     <div class="flex justify-between items-center">
                                         <div class="">
                                             <p class="font-semibold">{{ $product->name }}</p>
@@ -75,7 +75,7 @@
                                                     class="border border-gray-200 h-10 w-12 pl-2 rounded-md ">
                                                 <button type="submit"
                                                     class="inline-flex items-center justify-center w-10 h-10  text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                    <i class="fa-solid fa-plus"></i>
                                                 </button>
 
                                             </form>

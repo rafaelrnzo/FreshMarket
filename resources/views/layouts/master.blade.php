@@ -41,23 +41,23 @@
             <nav class="lg:block hidden">
                 <ul class="flex space-x-8 items-center">
                     <li class=" hover:border-b hover:border-b-black">
-                        <a class="text-black " href="#">
+                        <a class="text-black " href="{{ route('index') }}">
                             <p class="text-md font-medium">Shop</p>
                         </a>
                     </li>
                     <li class=" hover:border-b hover:border-b-black">
-                        <a class="text-black " href="#">
+                        <a class="text-black " href="{{ route('topup.index') }}">
                             <p class="text-md font-medium">TopUp</p>
                         </a>
                     </li>
                     <li class=" hover:border-b hover:border-b-black">
-                        <a class="text-black " href="#">
+                        <a class="text-black " href="{{ route('profile') }}">
                             <p class="text-md font-medium">My Profile</p>
                         </a>
                     </li>
 
                     <li>
-                        <a href="">
+                        <a href="{{ route('cart.index') }}">
                             <div class="bg-green-700 px-4 p-2 rounded-md">
                                 <p class="text-white font-medium text-sm">Basket</p>
                             </div>
