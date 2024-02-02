@@ -38,9 +38,11 @@
                         <th scope="col" class="px-6 py-3" align="left">
                             Status
                         </th>
-                        {{-- <th scope="col" class="px-6 py-3" align="left">
-                                Action
-                            </th> --}}
+                        <th scope="col" class="px-6 py-3" align="left">
+                            Action
+                        </th>
+                        <th scope="col" class="px-6 py-3" align="left">
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,14 +66,43 @@
                             @endif
 
                         </td>
-                        {{-- @if ($index === 0)
-                                <td class="flex gap-2" rowspan="{{ count($transaction) }}">
-                                    <a href="{{ route('admin.transaction.print', ['date' => $date, 'user_id' => $per_transaction->user->id]) }}"
-                                        class="btn btn-error text-black">
-                                     kdjasijdias
-                                    </a>
-                                </td>
-                            @endif --}}
+                        <td class="px-6 py-4">
+                            @if ($per_transaction->status == 'paid')
+                                <div class="flex justify-center items-center my-1 gap-2">
+                                    <form action="{{ route('kantin.confirm.transaction') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" value="{{ $per_transaction->id }}" name="transaction_id">
+                                        <input type="hidden" value="{{ $per_transaction->user->id }}" name="user_id">
+                                        {{-- <input type="hidden" name="nominals" value="{{ $per_transaction->nominals }}"> --}}
+                                        <button type="submit"
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                            Confirm
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('bank.topup.reject') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" value="{{ $per_transaction->id }}" name="transaction_id">
+                                        <button type="submit"
+                                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reject</button>
+                                    </form>
+                                </div>
+                            @else
+                                <button
+                                    class="success p-2 text-white font-semibold flex items-center gap-2 rounded-md text-center">
+                                    <span
+                                        class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Success</span>
+
+                                </button>
+                            @endif
+                        </td>
+                        @if ($index === 0)
+                            <td class="flex gap-2" rowspan="{{ count($transaction) }}">
+                                <a href="{{ route('kantin.transaction.print', ['date' => $date, 'user_id' => $per_transaction->user->id]) }}"
+                                    class="btn btn-error text-black">
+                                    View
+                                </a>
+                            </td>
+                        @endif
                         @endforeach
                     </tr>
                     @endforeach

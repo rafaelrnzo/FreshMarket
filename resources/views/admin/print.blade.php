@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Receipt</title>
-    @vite(['resources/css/app.css'])
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {{-- @vite(['resources/css/app.css']) --}}
     <style>
         @media print {
             #back-to-home {
@@ -16,85 +18,80 @@
     </style>
 </head>
 
-<body>
-    {{-- <div class="container mx-auto px-3 py-8 h-screen">
-        <h1 class="card-title">Receipt</h1>
-        <p>Pembelian {{ $user->name }}</p>
-        <p>Produk Yang Dibeli</p>
-        <ul class="mt-4">
+<body class="bg-slate-100 h-screen flex justify-center items-center ">
+    {{-- <div class="container mx-auto px-3 py-8">
+        <div class="bg-white shadow-md rounded-lg p-6 w-full">
+            <h1 class="text-xl font-bold mb-4">Receipt</h1>
+            <h2 class="text-lg font-semibold mb-2">Invoice Pembelian</h2>
+          
+            <div class="border-t border-gray-300 my-4"></div>
+          
             @foreach ($transactions as $transaction)
-                <li>
-                    {{ $transaction->product->name }} | {{ $transaction->product->price }} x
-                    {{ $transaction->quantity }} | Total Rp. {{ $transaction->total_prices }}
-                </li>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold">Nama Produk:</span>
+              <span class="text-gray-600">{{ $transaction->product->name }}</span>
+            </div>
+           <div class="flex justify-between mb-2">
+              <span class="font-semibold">Harga Produk:</span>
+              <span class="text-gray-600">{{ $transaction->product->price }} x {{ $transaction->quantity }}</span>
+            </div>
+            <div class="border-t border-gray-300 my-4"></div>
+          
             @endforeach
-        </ul>
-        <hr class="mt-4">
-        <div class="flex justify-end w-full" id="back-to-home">
-                <a href="{{ route('admin.transaction') }}" type="submit" class="btn btn-primary">Kembali</a>
+            <p>Total Harga</p>
+            <h1 class="font-semibold text-2xl">{{ session('total_prices') }} </h1>   
+          </div>  
+               
+          
         </div>
+        <div class="flex justify-end mb-8">
+            <form action="{{ route('receipt.take')}}" method="POST">
+                @csrf
+                <button type="submit" href="{{ route('index') }}" class="btn btn-primary mr-4">Kembali</button>
+            </form>
+        </div>
+        
+
+ --}}
 
 
-    </div> --}}
-
-
-    <div class="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+    <div class="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 w-full max-w-xl">
         <header class="flex justify-between items-center mb-6">
-            <img src="/placeholder.svg" alt="Store Logo" width="50" height="50" class="rounded-full"
-                style="aspect-ratio: 50 / 50; object-fit: cover;" />
-            <h1 class="text-2xl font-semibold text-center flex-grow">Order Receipt</h1>
-            <div></div>
+
+            <h1 class="text-2xl font-semibold text-center flex-grow">Order Receipt Admin</h1>
         </header>
         <section class="mb-6">
             <h2 class="text-xl font-semibold mb-2">Order Details</h2>
             <div class="grid gap-2 text-sm">
                 <div>Order Number: #123456</div>
                 <div>Order Date: January 31, 2024</div>
-                <div>Shipping Address: 123 Main St, Anytown, CA 12345</div>
-                <div>Billing Address: 123 Main St, Anytown, CA 12345</div>
             </div>
         </section>
         <section class="mb-6">
             <h2 class="text-xl font-semibold mb-2">Products</h2>
             <div class="grid gap-2 text-sm">
-                <div class="flex items-center gap-2">
-                    <img src="/placeholder.svg" alt="Product Image" width="50" height="50" class="rounded-md"
-                        style="aspect-ratio: 50 / 50; object-fit: cover;" />
-                    <div class="flex-grow">Product Name</div>
-                    <div>Qty: 2</div>
-                    <div>Price: $50.00</div>
-                    <div>Subtotal: $100.00</div>
-                </div>
-                <div class="flex items-center gap-2">
-                    <img src="/placeholder.svg" alt="Product Image" width="50" height="50" class="rounded-md"
-                        style="aspect-ratio: 50 / 50; object-fit: cover;" />
-                    <div class="flex-grow">Product Name</div>
-                    <div>Qty: 1</div>
-                    <div>Price: $30.00</div>
-                    <div>Subtotal: $30.00</div>
-                </div>
+                @foreach ($transactions as $transaction)
+                    <div class="flex items-center gap-2">
+                        <div class="flex-grow">{{ $transaction->product->name }}</div>
+                        <div>{{ $transaction->product->price }} x {{ $transaction->quantity }}</div>
+                    </div>
+                @endforeach
             </div>
         </section>
         <section class="mb-6">
-            <h2 class="text-xl font-semibold mb-2">Payment</h2>
             <div class="grid gap-2 text-sm">
-                <div>Total Amount: $130.00</div>
-                <div>Taxes: $10.00</div>
-                <div>Payment Method: Credit Card</div>
+                <h1 class="font-semibold text-2xl">{{ 'total_prices' }} </h1>
             </div>
         </section>
         <section>
-            <h2 class="text-xl font-semibold mb-2">Support</h2>
-            <div class="grid gap-2 text-sm">
-                <div>
-                    If you have any questions or need further assistance, please contact our customer support at
-                    support@onlinestore.com or call us at +1 888 8888 8888.
-                </div>
+            <div class="flex justify-end mb-8">
+                <form action="{{ route('receipt.take') }}" method="POST">
+                    @csrf
+                    <a href="{{ route('admin.transaction') }}" class="btn btn-primary mr-4">Kembali</a>
+                </form>
             </div>
         </section>
     </div>
-
-
 
     <script>
         window.print();

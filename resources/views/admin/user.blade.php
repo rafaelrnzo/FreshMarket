@@ -1,28 +1,46 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="px-12 p-6">
+    <div class="px-12 pt-16">
 
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-xl font-semibold">Users</h1>
-            <a href="{{ route('admin.adduser') }}" class="border-2 border-black font-bold text-black px-4 py-2">Add User</a>
+        <div class="flex justify-between items-center pb-6">
+            <h1 class="text-3xl text-white font-semibold">Users</h1>
+
+            <a href="{{ route('admin.adduser') }}"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                Add User</a>
         </div>
-        <div class="overflow-x-auto">
-            <table class="table table-zebra bg-white">
-                <thead>
+
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th>Id</th>
-                        <th>Nama</th>
-                        <th>Role</th>
-                        <th>Aksi</th>
+                        <th scope="col" class="px-6 py-3">
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            User
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Role
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $key => $user)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->role->name }}</td>
-                            <td class="flex gap-2">
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap ">
+                                {{ $key + 1 }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $user->name }}
+
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $user->role->name }}
+                            </td>
+                            <td class="flex gap-2 px-6 py-4">
                                 <form action="{{ route('admin.userdelete', $user->id) }}" method="post">
                                     @csrf
                                     @method('delete')
@@ -45,9 +63,9 @@
                             </td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
+
     </div>
 @endsection

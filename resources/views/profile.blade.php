@@ -4,7 +4,7 @@
 
         <div class="flex w-full gap-4">
             <div
-                class="w-1/4 block max-w-sm max-h-28 p-6 bg-white border border-gray-200 rounded-md shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                class="w-1/4 block max-w-sm max-h-28 p-6 bg-green-700 border border-gray-200 rounded-md shadow hover:bg-green-800 ">
                 <div class="top-left">
 
                     <div class="profile flex items-center gap-5">
@@ -14,7 +14,7 @@
                                 <a href="{{ route('logout') }}">Logout</a>
                             </div>
                             {{-- <p>Joined Date: {{ Auth::user()->created_at }}</p> --}}
-                            <p class="text-2xl font-semibold">{{ Auth::user()->wallet->credit }}</p>
+                            <p class="text-2xl font-semibold"> @currency(Auth::user()->wallet->credit)</p>
                         </div>
                     </div>
                 </div>
@@ -24,15 +24,15 @@
                 <div class=" gap-4 w-full flex flex-col">
 
                     <div
-                        class="w-full block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
+                        class="w-full block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow  ">
 
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">History
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">History
                             Transaction</h5>
                         @if (count($transactions))
                             <div class="grid grid-cols-1 mt-2">
                                 @foreach ($transactions as $date => $transactionGroup)
-                                    <h2 class="my-2 text-white">{{ $date }}</h2>
-                                    <div class="grid grid-cols-1 my-3 gap-2 bg-white rounded-md overflow-hidden shadow-md">
+                                    <h2 class="my-2 text-black">{{ $date }}</h2>
+                                    <div class="grid grid-cols-1 my-3 gap-2 bg-white rounded-md overflow-hidden border border-gray-200">
                                         @foreach ($transactionGroup as $transaction)
                                             <div class="p-3 h-fit w-full border-b-[1px]  ">
                                                 <div class="card-body ">
@@ -59,14 +59,14 @@
                     </div>
 
                     <div
-                        class="w-full block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
+                        class="w-full block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow  ">
 
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Top Up</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">Top Up</h5>
                         @if (count($transactions))
                             <div class="grid grid-cols-1 mt-2">
                                 @foreach ($topups as $date => $topupGroup)
-                                    <h2 class="my-2 text-white">{{ $date }}</h2>
-                                    <div class="grid grid-cols-1 my-3 gap-2 bg-white rounded-md overflow-hidden shadow-md">
+                                    <h2 class="my-2 text-black">{{ $date }}</h2>
+                                    <div class="grid grid-cols-1 my-3 gap-2 bg-white rounded-md overflow-hidden border border-gray-200">
                                         @foreach ($topupGroup as $topup)
                                             <div class="p-3 h-fit w-full border-b-[1px] flex justify-between items-center ">
                                                 <div class="card-body ">
@@ -111,14 +111,14 @@
                     </div>
 
                     <div
-                        class="w-full block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
+                        class="w-full block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
 
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Withdraw</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">Withdraw</h5>
                         @if (count($tariktunais))
                             <div class="grid grid-cols-1 mt-2">
                                 @foreach ($tariktunais as $date => $tarikTunaiGroup)
-                                    <h2 class="my-2 text-white">{{ $date }}</h2>
-                                    <div class="grid grid-cols-1 my-3 gap-2 bg-white rounded-md overflow-hidden shadow-md">
+                                    <h2 class="my-2 text-black ">{{ $date }}</h2>
+                                    <div class="grid grid-cols-1 my-3 gap-2 bg-white rounded-md overflow-hidden border border-gray-200">
                                         @foreach ($tarikTunaiGroup as $tarikTunai)
                                             <div class="p-3 h-fit w-full border-b-[1px] flex justify-between items-center ">
                                                 <div class="card-body ">

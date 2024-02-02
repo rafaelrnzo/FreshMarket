@@ -4,15 +4,15 @@
             <main class="flex flex-col gap-6">
                 <div class="border-b border-b-gray-200 grid md:grid-cols-2 py-4 items-center">
                     <div class="flex flex-col items-start ">
-                        <h3 class="text-6xl font-medium text-black">Produce</h3>
-                        @if (!Auth::user())
+                        <h3 class="md:text-6xl text-3xl font-medium text-black">Produce</h3>
+                        @if (Auth::user())
                             <span class="text-base text-gray-500">Welcome back - {{ Auth::user()->name }}</span>
                         @else
                             <span class="text-base text-gray-500">Please Login </span>
                         @endif
                     </div>
-                    <div class="flex  mt-1 items-center justify-end">
-                        @if (Auth::user())
+                    <div class="flex  mt-1 items-center md:justify-end justify-center ">
+                        @if (Auth::user()->role->id == 1)
                             <div class="flex space-x-12 p-4 rounded-md">
                                 <div class="flex gap-2 border bg-green-700 p-4 rounded-md">
                                     <div class="bg-white p-2 rounded-md px-3 flex gap-2 items-center">
@@ -26,7 +26,7 @@
                                             TopUp
                                         </div>
                                     </a>
-                                    <a href="{{ route('topup.index') }}"
+                                    <a href="{{ route('wd.index') }}"
                                         class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-background hover:bg-accent hover:text-accent-foreground  px-4 py-2 text-white">
                                         <div class="flex flex-col justify-center items-center">
                                             <i class="fa-solid fa-money-bill-transfer text-xl"></i>

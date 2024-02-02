@@ -37,34 +37,42 @@
     <div class="h-full mx-auto">
         <header
             class="fixed top-0 flex justify-between items-center mx-auto p-4 lg:px-32 bg-white w-full border-b border-b-gray-200">
-            <h3 class="xl:text-4xl text-xl font-medium text-green-700">Fresh Canteen</h3>
-            <nav class="lg:block hidden">
-                <ul class="flex space-x-8 items-center">
-                    <li class=" hover:border-b hover:border-b-black">
-                        <a class="text-black " href="{{ route('index') }}">
-                            <p class="text-md font-medium">Shop</p>
-                        </a>
-                    </li>
-                    <li class=" hover:border-b hover:border-b-black">
-                        <a class="text-black " href="{{ route('topup.index') }}">
-                            <p class="text-md font-medium">TopUp</p>
-                        </a>
-                    </li>
-                    <li class=" hover:border-b hover:border-b-black">
-                        <a class="text-black " href="{{ route('profile') }}">
-                            <p class="text-md font-medium">My Profile</p>
-                        </a>
-                    </li>
+            <h3 class="xl:text-4xl text-2xl font-medium text-green-700">Fresh Canteen</h3>
+            @if (Auth::user())
+                <nav class="lg:block hidden">
+                    <ul class="flex space-x-8 items-center">
+                        <li class=" hover:border-b hover:border-b-black">
+                            <a class="text-black " href="{{ route('index') }}">
+                                <p class="text-md font-medium">Shop</p>
+                            </a>
+                        </li>
+                        <li class=" hover:border-b hover:border-b-black">
+                            <a class="text-black " href="{{ route('topup.index') }}">
+                                <p class="text-md font-medium">TopUp</p>
+                            </a>
+                        </li>
+                        <li class=" hover:border-b hover:border-b-black">
+                            <a class="text-black " href="{{ route('profile') }}">
+                                <p class="text-md font-medium">My Profile</p>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="{{ route('cart.index') }}">
-                            <div class="bg-green-700 px-4 p-2 rounded-md">
-                                <p class="text-white font-medium text-sm">Basket</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                        <li>
+                            <a href="{{ route('cart.index') }}">
+                                <div class="bg-green-700 px-4 p-2 rounded-md">
+                                    <p class="text-white font-medium text-sm">Basket</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            @else
+            <a href="{{ route('login') }}">
+                <div class="bg-green-700 px-4 p-2 rounded-md">
+                    <p class="text-white font-medium text-sm">Login</p>
+                </div>
+            </a>
+            @endif
         </header>
 
         <div class="h-auto mt-[4.5rem] lg:py-16 lg:px-32 md:px-24 px-4 py-4">
@@ -72,7 +80,7 @@
             @yield('content')
         </div>
 
-        <div class="fixed bottom-0  h-auto w-full mb-16 ">
+        <div class="fixed bottom-0  h-auto w-full mb-16 md:hidden">
             <div class="flex justify-end px-4">
                 <a href="{{ route('cart.index') }}" class="bg-green-700 p-4 py-3 rounded-full text-white">
                     <i class="fa-solid fa-cart-shopping"></i>

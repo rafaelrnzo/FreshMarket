@@ -27,6 +27,9 @@
                         <th scope="col" class="px-6 py-3">
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Order ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             User
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -60,7 +63,7 @@
                                 @if ($wd->status == 'unconfirmed')
                                     <form action="{{ route('bank.tariktunai.store') }}" method="post">
                                         @csrf
-                                        <input type="hidden" value="{{ $wd->id }}" name="wd_id">
+                                        <input type="hidden" value="{{ $wd->id }}" name="tariktunai_id">
                                         <input type="hidden" value="{{ $wd->user->id }}" name="user_id">
                                         <input type="hidden" name="nominals" value="{{ $wd->nominals }}">
                                         <button type="submit"
@@ -68,7 +71,7 @@
                                     </form>
                                     <form action="{{ route('bank.tariktunai.reject') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" value="{{ $wd->id }}" name="wd_id">
+                                        <input type="hidden" value="{{ $wd->id }}" name="tariktunai_id">
                                         <button type="submit"
                                             class="border border-black px-4 p-1.5 text-black font-normal">Reject</button>
                                     </form>

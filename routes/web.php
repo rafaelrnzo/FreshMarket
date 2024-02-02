@@ -34,6 +34,8 @@ Route::middleware(['user'])->group(function(){
     Route::post('/receipt/take', [TransactionController::class,'receipt_take'])->name('receipt.take');
     Route::get('/topup', [TransactionController::class,'topup'])->name('topup.index');
     Route::post('/topup/proceed', [TransactionController::class,'topup_proceed'])->name('topup.proceed');
+    Route::get('/wd', [TransactionController::class,'wd'])->name('wd.index');
+    Route::post('/wd/proceed', [TransactionController::class,'wd_proceed'])->name('wd.proceed');
     Route::get('/topup/receipt/{orderid}',[TransactionController::class,'receipt_topup'])->name('topup.receipt');
     Route::get('/tariktunai', [TransactionController::class,'tarik_tunai'])->name('tarik.tunai');
     Route::get('/tariktunai/receipt/{order_id}',[TransactionController::class, 'receipt_tariktunai'])->name('tarik.tunai.receipt');
@@ -85,6 +87,7 @@ Route::prefix('/kantin')->group(function () {
         Route::put('/product/{id}/update', [KantinController::class,'updateproduct'])->name('kantin.updateproduct');
         Route::delete('/product/{id}/delete', [KantinController::class,'deleteproduct'])->name('kantin.deleteproduct');
         Route::get('/transaction', [KantinController::class,'transactionindex'])->name('kantin.transaction');
+        Route::post('/transaction/proceed', [KantinController::class,'confirmTransaction'])->name('kantin.confirm.transaction');
         Route::get('/transaction/print/{date}/{user_id}', [KantinController::class,'print'])->name('kantin.transaction.print');
     });
 });

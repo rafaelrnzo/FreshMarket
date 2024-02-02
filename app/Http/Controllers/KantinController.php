@@ -36,7 +36,7 @@ class KantinController extends Controller
     public function addproductstore(Request $request)
     {
         $imageThumbnail = "";
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $imageThumbnail = $request->file('image')->move('images/', $request->file('image')->getClientOriginalName() . now()->format('dmYHis') . $request->file('image')->getClientOriginalExtension());
         }
 
@@ -50,7 +50,7 @@ class KantinController extends Controller
             "description" => $request->deskripsi,
             "thumbnail" => $request->thumbnail
         ]);
-        
+
         alert()->success('Success', 'Success Add New Product!');
 
 
@@ -94,11 +94,11 @@ class KantinController extends Controller
         }
 
         $updateData = [
-          "name" => $request->name,
-          "stock" => $request->stock,
-          "category_id" => $request->category,
-          "price" => $request->harga,
-          "description" => $request->deskripsi
+            "name" => $request->name,
+            "stock" => $request->stock,
+            "category_id" => $request->category,
+            "price" => $request->harga,
+            "description" => $request->deskripsi
         ];
 
         if (!empty($imageThumbnail)) {
@@ -107,17 +107,27 @@ class KantinController extends Controller
 
         $product->update($updateData);
 
-           
+
         alert()->success('Success', 'Success Edit Product!');
 
         return redirect()->route('kantin.product.index');
-
     }
 
     public function transactionindex()
     {
         $transactions = Transaction::where('status', 'paid')->orWhere('status', 'taken')->orderBy('updated_at')->get()->groupBy('updated_at');
         return view('canteen.transaction', compact('transactions'));
+    }
+
+    public function confirmTransaction(Request $request)
+    {
+        $transactions = Transaction::find($request->transaction_id);
+
+        $transactions->update([
+            "status" => "taken"
+        ]);
+        alert()->success('Success', 'User has been take order!');
+        return redirect()->back();
     }
 
     public function print(string $date, string $user_id)
@@ -128,7 +138,6 @@ class KantinController extends Controller
             ->where('updated_at', urldecode($date))
             ->get();
 
-        return view('canteen.print', compact('transactions','user'));
+        return view('canteen.print', compact('transactions', 'user'));
     }
-
 }
